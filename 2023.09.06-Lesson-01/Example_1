@@ -1,10 +1,10 @@
-# 1 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/main.cpp"
+# 1 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/Example_1.cpp"
 # 1 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/main.cpp"
+# 1 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/Example_1.cpp"
 # 1 "/usr/include/c++/9/iostream" 1 3
 # 36 "/usr/include/c++/9/iostream" 3
        
@@ -28634,13 +28634,13 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 
 }
-# 2 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/main.cpp" 2
+# 2 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/Example_1.cpp" 2
 
 
-# 3 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/main.cpp"
+# 3 "/workspaces/2023-cpp-autumn/2023.09.06-Lesson-01/Example_1.cpp"
 int main() {
     int a = 0, b = 0;
-    std::cin >> a >> b;
-    std::cout << a << b
+ std::cin >> a >> b;
+    std::cout << a + b;
     return 0;
 }
