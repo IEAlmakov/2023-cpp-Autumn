@@ -396,6 +396,13 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.vscode/extensions.json
+2023.09.06-Lesson-01/main.dSYM/Contents/Info.plist
 .vscode/launch.json
-.vscode/settings.json
+.gitignore
+.DS_Store
 .vscode/tasks.json
+2023.09.06-Lesson-01/main.dSYM/Contents/Resources/DWARF/main
+2023.09.06-Lesson-01/Ex2.dSYM/Contents/Info.plist
+2023.09.06-Lesson-01/Ex2.dSYM/Contents/Resources/DWARF/Ex2
+2023.09.06-Lesson-01/Ex2
