@@ -5,7 +5,7 @@ int our_sum(int an) {
     int d = (abs(an - 1))/(an - 1);
     int n = 1 + ((an - 1)/ d);
     int s = (1 + an) * n / 2;
-	return s;
+    return s;
 }
 
 int main() {
