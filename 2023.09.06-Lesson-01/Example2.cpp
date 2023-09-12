@@ -10,7 +10,7 @@ int our_sum(int an) {
 
 int main() {
     int a_n = 0;
-	std::cin >> a_n;
+    std::cin >> a_n;
     a_n = our_sum(a_n);
     std::cout << a_n;
     return 0;
