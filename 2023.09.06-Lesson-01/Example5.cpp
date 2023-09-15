@@ -1,20 +1,14 @@
 #include <iostream>
 
-#define HIGHWAY 109 
-
-int distance (int V, int T) {
-    int rest = 0;
-    int distance = 0;
-    rest = (V * T) % HIGHWAY;
-    distance = (HIGHWAY + rest) % HIGHWAY + 1;
-    return distance;
-}
-
 int main() {
     int V = 0;
     int T = 0;
+    int rest = 0;
+    int distance = 0;
+    int highway = 109;
     std::cin >> V >> T;
-    V = distance (V, T);
-    std::cout << V << std::endl;
+    rest = (V * T) % highway;
+    distance = (highway + rest) % highway + 1;
+    std::cout << distance << std::endl;
     return 0;
 }
