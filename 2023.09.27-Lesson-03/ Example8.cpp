@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
     }
     else
     {
-        while (true)
+        while (1 > 0)
         {
             rem += a;
             std::cout << ">" << a_name << std::endl;
