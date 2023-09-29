@@ -9,21 +9,25 @@ int main(int argc, char* argv[])
     
     std::cin >> x;
 
-    for (int i = 1; i <= x; i++) 
+    int i = 1;
+    while (i <= x) 
     {
         if (i * i >= x) 
         {
             m = i;
             break;
         }
+        i++;
     }
 
-    for (int i = 1; i <= m; i++) 
+    i = 1;
+    while (i <= m) 
     {
         if (x % i == 0) 
         {
             k += 2;
         }
+        i++;
     }
 
     if (x % m == 0) 
