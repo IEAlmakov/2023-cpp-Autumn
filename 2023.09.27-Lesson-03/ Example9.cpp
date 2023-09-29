@@ -3,9 +3,9 @@
 int main(int argc, char* argv[])
 {
 	int a = 0; 
-    	int b = 0;
+	int b = 0;
 	std::cin >> a;
-   	std::cin >> b;
+	std::cin >> b;
 
 	while (a != b)
 	{
@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 			a /= 2;
 			std::cout << ":2" << std::endl;
 		} 
-        else
+		else
 		{
 			a--;
 			std::cout << "-1" << std::endl;

@@ -55,11 +55,7 @@ int main(int argc, char* argv[])
                 std::cout << a_name << ">" << b_name << std::endl;
                 rem %= b;
             }
-            if (rem == n)
-            {
-                return 0;
-            }
-            if (rem == 0)
+            if ((rem == n) || (rem == 0))
             {
                 break;
             }
