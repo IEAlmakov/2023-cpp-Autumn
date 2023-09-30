@@ -9,7 +9,7 @@ int main(int argc, char* argv[])
 
 	while (a != b)
 	{
-		if ((!(a % 2)) && (a / 2 >= b))
+		if ((a % 2 == 0) && (a / 2 >= b))
 		{
 			a /= 2;
 			std::cout << ":2" << std::endl;
