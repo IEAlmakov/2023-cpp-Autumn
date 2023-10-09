@@ -4,8 +4,8 @@
 int main(int argc, char* argv[]) 
 {
     int size    = 0;
-    int count   = 0;
-
+    int max_el  = 0;
+    
     std::cout << "Введите пожалуйста размер массива: ";
     std::cin >> size;
     std::cout << std::endl;
@@ -25,14 +25,15 @@ int main(int argc, char* argv[])
     }
     std::cout << std::endl;
 
+    max_el = *array;
     for (int i = 0; i < size; i++)
     {
-        if (*(array + i) > 0) 
+        if (*(array + i) > max_el) 
         {
-            count++;
+            max_el = *(array + i);
         }
     }
-    std::cout << count;
+    std::cout << "Максимальнй элемент: " << max_el << std::endl;
 
     free(array);
 

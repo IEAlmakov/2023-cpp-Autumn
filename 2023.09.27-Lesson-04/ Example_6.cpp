@@ -4,8 +4,11 @@
 int main(int argc, char* argv[]) 
 {
     int size    = 0;
-    int count   = 0;
-
+    int max_el  = 0;
+    int min_el  = 0;
+    int max_ind = 0;
+    int min_ind = 0;
+    
     std::cout << "Введите пожалуйста размер массива: ";
     std::cin >> size;
     std::cout << std::endl;
@@ -25,14 +28,30 @@ int main(int argc, char* argv[])
     }
     std::cout << std::endl;
 
+    max_el = *array;
+    min_el = *array;
     for (int i = 0; i < size; i++)
     {
-        if (*(array + i) > 0) 
+        if (*(array + i) >= max_el) 
         {
-            count++;
+            max_el = *(array + i);
+            max_ind = i;
+        }
+        if (*(array + i) < min_el) 
+        {
+            min_el = *(array + i);
+            min_ind = i;
         }
     }
-    std::cout << count;
+    *(array + min_ind) = max_el;
+    *(array + max_ind) = min_el;
+
+    std::cout << "Элементы массива: " << std::endl;
+    for (int i = 0; i < size; i++)
+    {
+        std::cout << *(array + i) << " ";
+    }
+    std::cout << std::endl;
 
     free(array);
 
