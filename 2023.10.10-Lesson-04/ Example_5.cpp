@@ -3,9 +3,7 @@
 
 int main(int argc, char* argv[]) 
 {
-    int size    = 0;
-    int max_el  = 0;
-    
+    int size = 0;
     std::cout << "Введите пожалуйста размер массива: ";
     std::cin >> size;
     std::cout << std::endl;
@@ -25,15 +23,12 @@ int main(int argc, char* argv[])
     }
     std::cout << std::endl;
 
-    max_el = *array;
-    for (int i = 0; i < size; i++)
+    std::cout << "Элементы массива в обратном порядке: " << std::endl;
+    for (int i = (size - 1); i >= 0; i--)
     {
-        if (*(array + i) > max_el) 
-        {
-            max_el = *(array + i);
-        }
+        std::cout << *(array + i) << " ";
     }
-    std::cout << "Максимальнй элемент: " << max_el << std::endl;
+    std::cout << std::endl;
 
     free(array);
 

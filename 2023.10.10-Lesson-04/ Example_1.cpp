@@ -4,7 +4,6 @@
 int main(int argc, char* argv[]) 
 {
     int size = 0;
-    
     std::cout << "Введите пожалуйста размер массива: ";
     std::cin >> size;
     std::cout << std::endl;
@@ -24,12 +23,15 @@ int main(int argc, char* argv[])
     }
     std::cout << std::endl;
 
-    std::cout << "Элементы массива на нечетных местах: " << std::endl;
-    for (int i = 1; i < size; i += 2)
+    int count = 0;
+    for (int i = 0; i < size; i++)
     {
-        std::cout << *(array + i) << " ";
+        if (*(array + i) > 0) 
+        {
+            count++;
+        }
     }
-    std::cout << std::endl;
+    std::cout << count;
 
     free(array);
 

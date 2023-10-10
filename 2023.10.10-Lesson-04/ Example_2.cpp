@@ -4,7 +4,6 @@
 int main(int argc, char* argv[]) 
 {
     int size = 0;
-
     std::cout << "Введите пожалуйста размер массива: ";
     std::cin >> size;
     std::cout << std::endl;
