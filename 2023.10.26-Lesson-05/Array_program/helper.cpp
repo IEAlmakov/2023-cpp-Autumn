@@ -16,7 +16,7 @@ void printMenu()
 {
     std::cout << "1 - Выйти из программы" << std::endl;
     std::cout << "2 - Вывести массив" << std::endl;
-        std::cout << "3 - Добавить элемент в массив" << std::endl;
+    std::cout << "3 - Добавить элемент в массив" << std::endl;
     std::cout << "4 - Удалить элемент из массива" << std::endl;
     std::cout << "5 - Отсортировать массив по возрастанию" << std::endl;
     std::cout << "6 - Развернуть массив" << std::endl;

@@ -12,10 +12,11 @@ void arrayInitialization (int** array, int* len) {
 
 void arrayCreate(int** array, int len)
 {
-    free(*array);
-
-    *array = (int *) malloc (sizeof(int) * (len));
-
+    if (array != NULL)
+    {
+        free(*array);
+    }
+    *array = (int*) malloc(sizeof(int) * (len));
     if (array == NULL)
     {
         std::cout << "Массив не получилось создать" << std::endl;

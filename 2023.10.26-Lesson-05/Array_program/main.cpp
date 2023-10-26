@@ -13,11 +13,9 @@ int main(int argc, char* argv[])
 
     while (!exit)
     {
-        system("cls");
+        system("clear");
         printMenu();
         std::cout << std::endl;
-        arrayPrint (array, len);
-
         int option  = 0;
         correct(&option);
 
@@ -63,8 +61,8 @@ int main(int argc, char* argv[])
             std::cout << "Введите пожалуйста другую опцию" << std::endl;
             break;
         }
+        system("read");
     }
-
     free(array);
 
     return EXIT_SUCCESS;
