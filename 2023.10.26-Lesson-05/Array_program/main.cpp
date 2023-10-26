@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
             std::cout << "Введите пожалуйста другую опцию" << std::endl;
             break;
         }
+        std::cout << "Для продолжения нажмите любую клавишу" << std::endl;
         system("read");
     }
     free(array);
