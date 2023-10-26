@@ -22,12 +22,12 @@ void printMenu()
     std::cout << "6 - Развернуть массив" << std::endl;
     std::cout << "7 - Поменять местами максимальный и минимальный элемент массива" << std::endl;
     std::cout << "8 - Удалить из массива все дубликаты" << std::endl;
-    std::cout << "9 - Создание(Пересоздание) массива произвольного размера и заполнение его" << std::endl;
+    std::cout << "9 -  Добавить в массив n случайных элементов" << std::endl;
 }
 
 void arrayPrint (int* array, int len)
 {
-    if (array == NULL)
+    if (array == nullptr)
     {
         std::cout << "Массива не существует" << std::endl;
     }

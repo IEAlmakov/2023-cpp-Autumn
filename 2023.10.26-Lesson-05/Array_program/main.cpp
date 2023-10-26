@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
     setlocale(LC_ALL, "Russian");
 
-    int *array  = NULL;
+    int *array  = nullptr;
     int len     = 0;
     bool exit   = false;
 
@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 
         int index = 0;
         int element = 0;
+        int n = 0;
 
         switch (option)
         {
@@ -29,40 +30,39 @@ int main(int argc, char* argv[])
                 break;
             case 2:
                 arrayPrint (array, len);
+                std::cout << "Для продолжения нажмите любую клавишу" << std::endl;
+                system("read");
                 break;
             case 3:
                 index = indexCheck(index);
                 element = elementCheck(element);
-                arrayAdd(&array, &len, index, element);
+                arrayAdd(array, len, index, element);
                 break;
             case 4:
                 index = indexCheck(index);
-                arrayDelete(&array, &len, index);
+                arrayDelete(array, len, index);
                 break;
             case 5:
-                arrayBinarySort(&array, len);
+                arrayBinarySort(array, len);
                 break;
             case 6:
-                arrayReverse(&array, len);
+                arrayReverse(array, len);
                 break;
             case 7:
-                arraySwitch(&array, len);
+                arraySwitch(array, len);
                 break;
             case 8:
-                arrayDeleteDuplicate(&array, &len);
+                arrayDeleteDuplicate(array, len);
                 break;
             case 9:
-                std::cout << "Введите пожалуйста размер массива" << std::endl;
-                correct(&len);
-                arrayCreate(&array, len);
-                arrayInitialization (&array, &len);
+                std::cout << "Введите пожалуйста количество элементов" << std::endl;
+                correct(&n);
+                arrayRandom(array, len, n);
                 break;
             default:
                 std::cout << "Введите пожалуйста другую опцию" << std::endl;
                 break;
         }
-        std::cout << "Для продолжения нажмите любую клавишу" << std::endl;
-        system("read");
     }
     free(array);
 
