@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "correct.h"
+#include "helper.h"
 #include "array.h"
 
 int main(int argc, char* argv[])
@@ -13,13 +13,16 @@ int main(int argc, char* argv[])
 
     while (!exit)
     {
-        //system("cls");
-        //printMenu();
+        system("cls");
+        printMenu();
         std::cout << std::endl;
         arrayPrint (array, len);
 
         int option  = 0;
         correct(&option);
+
+        int index = 0;
+        int element = 0;
 
         switch (option)
         {
@@ -30,10 +33,13 @@ int main(int argc, char* argv[])
             arrayPrint (array, len);
             break;
         case 3:
-            arrayAdd(&array, &len);
+            index = indexCheck(index);
+            element = elementCheck(element);
+            arrayAdd(&array, &len, index, element);
             break;
         case 4:
-            arrayDelete(&array, &len);
+            index = indexCheck(index);
+            arrayDelete(&array, &len, index);
             break;
         case 5:
             arrayBinarySort(&array, len);
@@ -48,7 +54,10 @@ int main(int argc, char* argv[])
             arrayDeleteDuplicate(&array, &len);
             break;
         case 9:
-            arrayCreate(&array, &len);
+            std::cout << "Введите пожалуйста размер массива" << std::endl;
+            correct(&len);
+            arrayCreate(&array, len);
+            arrayInitialization (&array, &len);
             break;
         default:
             std::cout << "Введите пожалуйста другую опцию" << std::endl;

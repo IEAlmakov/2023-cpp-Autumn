@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 add_executable(Array_program main.cpp
-    correct.h correct.cpp
+    helper.h helper.cpp
     array.h array.cpp)
 
 include(GNUInstallDirs)

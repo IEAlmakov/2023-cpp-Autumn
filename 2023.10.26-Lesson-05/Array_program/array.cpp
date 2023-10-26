@@ -1,36 +1,8 @@
 #include "array.h"
-#include "correct.h"
+#include "helper.h"
 
-void printMenu()
-{
-    std::cout << "1 - Выйти из программы" << std::endl;
-    std::cout << "2 - Вывести массив" << std::endl;
-    std::cout << "3 - Добавить элемент в массив" << std::endl;
-    std::cout << "4 - Удалить элемент из массива" << std::endl;
-    std::cout << "5 - Отсортировать массив по возрастанию" << std::endl;
-    std::cout << "6 - Развернуть массив" << std::endl;
-    std::cout << "7 - Поменять местами максимальный и минимальный элемент массива" << std::endl;
-    std::cout << "8 - Удалить из массива все дубликаты" << std::endl;
-    std::cout << "9 - Создание(Пересоздание) массива произвольного размера и заполнение его" << std::endl;
-}
-
-void arrayCreate(int** array, int* len)
-{
-    int len1 = 0;
-    free(*array);
-
-    std::cout << "Введите пожалуйста размер массива" << std::endl;
-    correct(&len1);
-
-    *len = len1;
-    *array = (int *) malloc (sizeof(int) * (*len));
-
-    if (array == NULL)
-    {
-        std::cout << "Массив не получилось создать" << std::endl;
-    }
-
-    for (int i = 0; i < *len; i++)
+void arrayInitialization (int** array, int* len) {
+    for (int i = 0; i < (*len); i++)
     {
         std::cout << "Введите элемент массива" << std::endl;
         correct(&(*array)[i]);
@@ -38,43 +10,27 @@ void arrayCreate(int** array, int* len)
     }
 }
 
-void arrayPrint (int* array, int len)
+void arrayCreate(int** array, int len)
 {
+    free(*array);
+
+    *array = (int *) malloc (sizeof(int) * (len));
+
     if (array == NULL)
     {
-        std::cout << "Массива не существует" << std::endl;
-    }
-    else
-    {
-        std::cout << "Элементы массива" << std::endl;
-        for (int i = 0; i < len; i++)
-        {
-            std::cout << array[i] << std::endl;
-        }
+        std::cout << "Массив не получилось создать" << std::endl;
     }
 }
 
-void arrayAdd(int** array, int* len)
+void arrayAdd(int** array, int* len, int index, int element)
 {
     if (array == NULL)
     {
-        std::cout << "Проинициализируйте пожалуйста массив" << std::endl;
+        *len = *len + 1;
+        arrayCreate(array, *len);
     }
 
     else {
-        std::cout << "Введите индекс элемента массива" << std::endl;
-        std::cout << "!!!! Индекс элемента >= 0 !!!!!" << std::endl;
-
-            int index = -1;
-        while (index < 0)
-        {
-            correct(&index);
-        }
-
-        int element = 0;
-        std::cout << "Введите элемент массива" << std::endl;
-        correct(&element);
-
         if (index < (*len))
         {
             (*array)[index] = element;
@@ -88,7 +44,7 @@ void arrayAdd(int** array, int* len)
     }
 }
 
-void arrayDelete (int** array, int* len)
+void arrayDelete (int** array, int* len, int index)
 {
     if (array == NULL)
     {
@@ -96,14 +52,6 @@ void arrayDelete (int** array, int* len)
     }
 
     else {
-        std::cout << "Введите индекс элемента массива" << std::endl;
-        std::cout << "!!!! Индекс элемента >= 0 !!!!!" << std::endl;
-
-            int index = -1;
-        while (index < 0)
-        {
-            correct(&index);
-        }
 
         if (index < *len)
         {
@@ -133,13 +81,16 @@ void arrayBinarySort(int** array, int len)
         int i   = 0;
         int j   = 0;
         int key = 0;
+
         for (i = 1; i < len; i++) {
             key = (*array)[i];
             j = i - 1;
+
             while (j >= 0 && (*array)[j] > key) {
                 (*array)[j + 1] = (*array)[j];
                 j = j - 1;
             }
+
             (*array)[j + 1] = key;
         }
     }
@@ -147,6 +98,7 @@ void arrayBinarySort(int** array, int len)
 
 void arrayReverse(int** array, int len)
 {
+
     if (array == NULL)
     {
         std::cout << "Массива не существует" << std::endl;
@@ -163,6 +115,7 @@ void arrayReverse(int** array, int len)
         free(*array);
         (*array) = arrayR;
     }
+
 }
 
 void arraySwitch(int** array, int len)
