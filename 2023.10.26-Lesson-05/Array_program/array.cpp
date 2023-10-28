@@ -139,12 +139,12 @@ void arraySwitch(int *&array, int len)
 
         for (int i = 0; i < len; i++)
         {
-            if (maxInt <= (array)[i])
+            if (maxInt < (array)[i])
             {
                 maxInt = (array)[i];
                 maxInd = i;
             }
-            if (minInt > (array)[i])
+            if (minInt >= (array)[i])
             {
                 minInt = (array)[i];
                 minInd = i;
