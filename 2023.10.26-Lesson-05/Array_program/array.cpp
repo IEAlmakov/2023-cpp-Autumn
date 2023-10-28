@@ -197,12 +197,7 @@ void arrayRandom(int*& array, int& len, int n)
 
     for (int i = 0; i < n; i++)
     {
-        int randomElement = 2147483647;
-        while (randomElement >= 2147483647)
-        {
-            randomElement = rand();
+        int randomElement = rand() % (1000 - (-1000) + 1) - 1000;
             arrayAdd(array, len, len, randomElement);
-        }
-        std::cout << randomElement << std::endl;
     }
 }
