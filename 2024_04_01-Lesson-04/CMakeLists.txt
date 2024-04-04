@@ -21,19 +21,19 @@ add_executable(task7 task7.cpp graph.h graph.cpp)
 
 add_executable(task8 task8.cpp graph.h graph.cpp)
 
-add_executable(task9 task9.cpp)
+add_executable(task9 task9.cpp graph.h graph.cpp)
 
-add_executable(task10 task10.cpp)
+add_executable(task10 task10.cpp graph.h graph.cpp)
 
-add_executable(task11 task11.cpp)
+add_executable(task11 task11.cpp graph.h graph.cpp)
 
-add_executable(task12 task12.cpp)
+add_executable(task12 task12.cpp graph.h graph.cpp)
 
-add_executable(task13 task13.cpp)
+add_executable(task13 task13.cpp graph.h graph.cpp)
 
-add_executable(task14 task14.cpp)
+add_executable(task14 task14.cpp graph.h graph.cpp)
 
-add_executable(task15 task15.cpp)
+add_executable(task15 task15.cpp graph.h graph.cpp)
 
 add_executable(task16 task16.cpp graph.h graph.cpp)
 

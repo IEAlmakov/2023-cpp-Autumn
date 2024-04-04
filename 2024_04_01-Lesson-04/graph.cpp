@@ -9,7 +9,7 @@ std::ostream &operator<<(std::ostream &stream, const SEdge &edge)
     }
     return stream;
 }
- 
+
 void Edge::initEdges()
 {
     disposeEdges();
@@ -19,7 +19,7 @@ void Edge::initEdges()
     }
     _edge = new SEdge[_edges];
 }
- 
+
 void Edge::disposeEdges()
 {
     if (_edge != nullptr)
@@ -28,7 +28,7 @@ void Edge::disposeEdges()
         _edge = nullptr;
     }
 }
- 
+
 void Edge::readEdges(int edges, bool haveweight)
 {
     _edges = edges;
@@ -42,7 +42,7 @@ void Edge::readEdges(int edges, bool haveweight)
         }
     }
 }
- 
+
 int Edge::getVertexesCountFromEdges()
 {
     int res = INT_MIN;
@@ -53,7 +53,7 @@ int Edge::getVertexesCountFromEdges()
     }
     return res + 1;
 }
- 
+
 void Edge::listCrossing(int roads, int tunnels)
 {
     int *_list = new int[roads]{};
@@ -71,7 +71,7 @@ void Edge::listCrossing(int roads, int tunnels)
     }
     delete[] _list;
 }
- 
+
 int Edge::specialPlanet()
 {
     int maxPlanet = -1;
@@ -80,17 +80,17 @@ int Edge::specialPlanet()
         maxPlanet = (maxPlanet > _edge[i].from) ? maxPlanet : _edge[i].from;
         maxPlanet = (maxPlanet > _edge[i].to) ? maxPlanet : _edge[i].to;
     }
- 
+
     int *count = new int[maxPlanet + 1]();
- 
+
     for (int i = 0; i < _edges; ++i)
     {
         count[_edge[i].from]++;
         count[_edge[i].to]++;
     }
- 
+
     int importantPlanets = 0;
- 
+
     for (int i = 1; i <= maxPlanet; ++i)
     {
         if (count[i] > 1)
@@ -98,12 +98,12 @@ int Edge::specialPlanet()
             importantPlanets++;
         }
     }
- 
+
     delete[] count;
- 
+
     return importantPlanets;
 }
- 
+
 void Vertex::initMatrix()
 {
     disposeMatrix();
@@ -117,7 +117,7 @@ void Vertex::initMatrix()
         _matrixFromVertexes[i] = new int[_vertexes]{0};
     }
 }
- 
+
 void Vertex::disposeMatrix()
 {
     if (_matrixFromVertexes != nullptr)
@@ -130,7 +130,7 @@ void Vertex::disposeMatrix()
         _matrixFromVertexes = nullptr;
     }
 }
- 
+
 void Vertex::readRGBRoads(int countOfRGBRoads)
 {
     _countOfRGBRoads = countOfRGBRoads;
@@ -140,7 +140,7 @@ void Vertex::readRGBRoads(int countOfRGBRoads)
         std::cin >> _rgbRoads[i];
     }
 }
- 
+
 void Vertex::colorMatrix()
 {
     for (int i = 0, k = 0; i < _countOfRGBRoads; ++i, ++k)
@@ -151,11 +151,11 @@ void Vertex::colorMatrix()
         }
     }
 }
- 
+
 int Vertex::algorithmFloydWarshall()
 {
     int minDist = INT_MAX;
- 
+
     for (int i = 0; i < _vertexes; ++i)
     {
         for (int j = 0; j < _vertexes; ++j)
@@ -173,10 +173,10 @@ int Vertex::algorithmFloydWarshall()
             }
         }
     }
- 
+
     return minDist;
 }
- 
+
 int Vertex::countWrongRGBRoads()
 {
     int count = 0;
@@ -193,13 +193,13 @@ int Vertex::countWrongRGBRoads()
     }
     return (count / 2);
 }
- 
+
 void Vertex::initRGBRoads()
 {
     disposeRGBRoads();
     _rgbRoads = new int[_countOfRGBRoads];
 }
- 
+
 void Vertex::disposeRGBRoads()
 {
     if (_rgbRoads != nullptr)
@@ -208,7 +208,7 @@ void Vertex::disposeRGBRoads()
         _rgbRoads = nullptr;
     }
 }
- 
+
 void Vertex::readMatrix(int vertexes)
 {
     _vertexes = vertexes;
@@ -221,7 +221,7 @@ void Vertex::readMatrix(int vertexes)
         }
     }
 }
- 
+
 int Vertex::getEdgesCountFromMatrix()
 {
     int count = 0;
@@ -234,7 +234,7 @@ int Vertex::getEdgesCountFromMatrix()
     }
     return count;
 }
- 
+
 int Vertex::countRoads()
 {
     int count = 0;
@@ -249,19 +249,21 @@ int Vertex::countRoads()
     }
     return count;
 }
- 
+
 void Graph::init()
 {
     initMatrix();
     initEdges();
 }
- 
+
 void Graph::dispose()
 {
     disposeMatrix();
     disposeEdges();
+    delete[] adjList;
+    delete[] parent;
 }
- 
+
 void Graph::printEdges()
 {
     if (_edge == nullptr)
@@ -278,13 +280,13 @@ void Graph::printEdges()
         std::cout << _edge[i] << std::endl;
     }
 }
- 
+
 void Graph::initMatrixFromEdges()
 {
     disposeMatrix();
     _vertexes = getVertexesCountFromEdges();
     initMatrix();
- 
+
     if (_matrixFromVertexes == nullptr)
     {
         _matrixFromVertexes = new int *[_vertexes];
@@ -293,13 +295,13 @@ void Graph::initMatrixFromEdges()
             _matrixFromVertexes[i] = new int[_vertexes]();
         }
     }
- 
+
     for (int i = 0; i < _edges; ++i)
     {
         _matrixFromVertexes[_edge[i].from][_edge[i].to] = _edge[i].weight;
     }
 }
- 
+
 void Graph::initEdgesFromMatrixOfVertexes()
 {
     disposeEdges();
@@ -316,7 +318,7 @@ void Graph::initEdgesFromMatrixOfVertexes()
         }
     }
 }
- 
+
 void Graph::printMatrix()
 {
     if (_matrixFromVertexes == nullptr)
@@ -337,7 +339,7 @@ void Graph::printMatrix()
         std::cout << std::endl;
     }
 }
- 
+
 long long Graph::ourMommy(long long children_1, long long children_2)
 {
     while (children_1 != children_2)
@@ -400,7 +402,7 @@ void Graph::createAdjacencyList(int n, int m)
     delete[] cnt;
 }
 
-void GraphSolver::resizeArrays()
+void Graph::resizeArrays()
 {
     adjList = new Node *[n + 1];
     parent = new int[n + 1]();
@@ -410,7 +412,7 @@ void GraphSolver::resizeArrays()
     }
 }
 
-void GraphSolver::dfs(int i, int p)
+void Graph::dfs(int i, int p)
 {
     parent[i] = p;
     Node *curr = adjList[i];
@@ -424,7 +426,7 @@ void GraphSolver::dfs(int i, int p)
     }
 }
 
-int GraphSolver::findCommonAncestor(int u, int v)
+int Graph::findCommonAncestor(int u, int v)
 {
     while (u != v)
     {
@@ -440,14 +442,14 @@ int GraphSolver::findCommonAncestor(int u, int v)
     return u;
 }
 
-void GraphSolver::addEdge(int from, int to)
+void Graph::addEdge(int from, int to)
 {
     Node *newNode = new Node(to);
     newNode->next = adjList[from];
     adjList[from] = newNode;
 }
 
-void GraphSolver::setInput()
+void Graph::setInput()
 {
     int tmp;
     std::cin >> n >> monitor1 >> monitor2;
@@ -461,7 +463,7 @@ void GraphSolver::setInput()
     }
 }
 
-void GraphSolver::solveGraph()
+void Graph::solveGraph()
 {
     dfs(1, 0);
     int commonAncestor = findCommonAncestor(monitor1, monitor2);
