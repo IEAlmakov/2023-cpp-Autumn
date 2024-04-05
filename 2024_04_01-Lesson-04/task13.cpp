@@ -1,57 +1,17 @@
-#include <iostream>
+#include "graph.h"
 
-class GraphSolver
+int main(int argc, char *argv[])
 {
-private:
-    int edges[10000][2];
-    int n, m;
+    Graph graph;
 
-public:
-    void readGraph();
-    bool isCompleteGraph();
-};
-
-void GraphSolver::readGraph()
-{
+    int n = 0;
+    int m = 0;
     std::cin >> n >> m;
 
-    for (int i = 0; i < m; ++i)
-    {
-        std::cin >> edges[i][0] >> edges[i][1];
-    }
-}
+    graph.readEdges(m);
+    graph.initMatrixFromEdges();
 
-bool GraphSolver::isCompleteGraph()
-{
-    bool adjMatrix[100][100] = {false};
-
-    for (int i = 0; i < m; ++i)
-    {
-        int u = edges[i][0] - 1;
-        int v = edges[i][1] - 1;
-        adjMatrix[u][v] = adjMatrix[v][u] = true;
-    }
-
-    for (int i = 0; i < n; ++i)
-    {
-        for (int j = i + 1; j < n; ++j)
-        {
-            if (!adjMatrix[i][j])
-            {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-int main()
-{
-    GraphSolver graphSolver;
-    graphSolver.readGraph();
-
-    if (graphSolver.isCompleteGraph())
+    if (graph.completeGraph() == 1)
     {
         std::cout << "YES" << std::endl;
     }

@@ -60,6 +60,7 @@ public:
     void listCrossing(int roads, int tunnels);
     int getVertexesCountFromEdges();
     int specialPlanet();
+    bool isTournament(int n, int m);
 
 protected:
     void initEdges();
@@ -116,7 +117,8 @@ public:
     {
     }
     Graph(int edges, int vertexes)
-        : Edge(edges), Vertex(vertexes), n(0), monitor1(0), monitor2(0), adjList(nullptr), parent(nullptr)
+        : Edge(edges), Vertex(vertexes), n(0), monitor1(0), monitor2(0), adjList(nullptr), parent(nullptr),
+          _linePowVertexes(nullptr)
     {
     }
 
@@ -129,11 +131,18 @@ public:
     void initMatrixFromEdges();
     void initEdgesFromMatrixOfVertexes();
     void createAdjacencyList(int n, int m);
+    void createAdjacencyMatrix(int n);
     void addEdge(int from, int to);
     void setInput();
     void solveGraph();
     void resizeArrays();
     void dfs(int i, int p);
+    void powVertexes();
+    void printPowVertexes();
+    int regularGraph();
+    int orientedGraph();
+    int completeGraph();
+    void sourcesdrains();
 
     long long ourMommy(long long children_1, long long children_2);
     int findCommonAncestor(int u, int v);
@@ -144,6 +153,7 @@ private:
 
     int n, monitor1, monitor2;
     Node **adjList;
+    int *_linePowVertexes;
     int *parent;
 };
 

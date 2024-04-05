@@ -20,6 +20,53 @@ void Edge::initEdges()
     _edge = new SEdge[_edges];
 }
 
+bool Edge::isTournament(int n, int m)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        for (int j = 0; j < n; ++j)
+        {
+            if (i != j)
+            {
+                bool found = false;
+                for (int k = 0; k < m; ++k)
+                {
+                    if (_edge[k].from == i + 1 && _edge[k].to == j + 1)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    bool foundReverse = false;
+                    for (int k = 0; k < m; ++k)
+                    {
+                        if (_edge[k].from == j + 1 && _edge[k].to == i + 1)
+                        {
+                            foundReverse = true;
+                            break;
+                        }
+                    }
+
+                    if (!foundReverse)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+
+    if (m != n * (n - 1) / 2)
+    {
+        return false;
+    }
+
+    return true;
+}
+
 void Edge::disposeEdges()
 {
     if (_edge != nullptr)
@@ -262,6 +309,7 @@ void Graph::dispose()
     disposeEdges();
     delete[] adjList;
     delete[] parent;
+    delete[] _linePowVertexes;
 }
 
 void Graph::printEdges()
@@ -284,7 +332,7 @@ void Graph::printEdges()
 void Graph::initMatrixFromEdges()
 {
     disposeMatrix();
-    _vertexes = getVertexesCountFromEdges();
+    _vertexes = getVertexesCountFromEdges() - 1;
     initMatrix();
 
     if (_matrixFromVertexes == nullptr)
@@ -298,7 +346,7 @@ void Graph::initMatrixFromEdges()
 
     for (int i = 0; i < _edges; ++i)
     {
-        _matrixFromVertexes[_edge[i].from][_edge[i].to] = _edge[i].weight;
+        _matrixFromVertexes[_edge[i].from - 1][_edge[i].to - 1] = _edge[i].weight;
     }
 }
 
@@ -402,6 +450,47 @@ void Graph::createAdjacencyList(int n, int m)
     delete[] cnt;
 }
 
+void Graph::createAdjacencyMatrix(int n)
+{
+    int **adjMatrix = new int *[n];
+
+    for (int i = 0; i < n; ++i)
+    {
+        adjMatrix[i] = new int[n]();
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        int numEdges;
+        std::cin >> numEdges;
+
+        for (int j = 0; j < numEdges; j++)
+        {
+            int connectedVertex;
+            std::cin >> connectedVertex;
+
+            adjMatrix[i][connectedVertex - 1] = 1;
+        }
+    }
+
+    std::cout << n << std::endl;
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            std::cout << adjMatrix[i][j] << " ";
+        }
+        std::cout << std::endl;
+    }
+
+    for (int i = 0; i < n; ++i)
+    {
+        delete[] adjMatrix[i];
+    }
+    delete[] adjMatrix;
+}
+
 void Graph::resizeArrays()
 {
     adjList = new Node *[n + 1];
@@ -468,4 +557,140 @@ void Graph::solveGraph()
     dfs(1, 0);
     int commonAncestor = findCommonAncestor(monitor1, monitor2);
     std::cout << commonAncestor;
+}
+
+void Graph::powVertexes()
+{
+    _linePowVertexes = new int[_vertexes]{0};
+
+    for (int i = 0; i < _vertexes; ++i)
+    {
+        for (int j = 0; j < _vertexes; ++j)
+        {
+            if (_matrixFromVertexes[j][i] == 1)
+            {
+                _linePowVertexes[i] += 1;
+            }
+        }
+    }
+}
+
+int Graph::regularGraph()
+{
+    powVertexes();
+    for (int i = 0; i < _vertexes - 1; ++i)
+    {
+        if (_linePowVertexes[i] != _linePowVertexes[i + 1])
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int Graph::orientedGraph()
+{
+    for (int i = 0; i < _vertexes; i++)
+    {
+        if (_matrixFromVertexes[i][i] != 0)
+        {
+            return 1;
+        }
+    }
+
+    for (int i = 0; i < _vertexes; i++)
+    {
+        for (int j = i + 1; j < _vertexes; j++)
+        {
+            if ((_matrixFromVertexes[i][j] != _matrixFromVertexes[j][i]) &&
+                (_matrixFromVertexes[i][j] != 0 || _matrixFromVertexes[j][i] != 0))
+            {
+                return 0;
+            }
+        }
+    }
+
+    return 1;
+}
+
+int Graph::completeGraph()
+{
+    int completeEdges = (_vertexes * (_vertexes - 1)) / 2;
+    int actualEdges = 0;
+
+    for (int i = 0; i < _vertexes; ++i)
+    {
+        for (int j = 0; j < _vertexes; ++j)
+        {
+            if (i != j && _matrixFromVertexes[i][j] > 0)
+            {
+                ++actualEdges;
+            }
+        }
+    }
+
+    return actualEdges == completeEdges;
+}
+
+void Graph::sourcesdrains()
+{
+    int *sources = new int[_vertexes];
+    int *drains = new int[_vertexes];
+    int sourcesCount = 0;
+    int drainsCount = 0;
+
+    for (int i = 0; i < _vertexes; ++i)
+    {
+        bool isSource = true;
+        bool isDrain = true;
+
+        for (int j = 0; j < _vertexes; ++j)
+        {
+            if (_matrixFromVertexes[j][i] != 0)
+            {
+                isSource = false;
+            }
+
+            if (_matrixFromVertexes[i][j] != 0)
+            {
+                isDrain = false;
+            }
+        }
+
+        if (isSource)
+        {
+            sources[sourcesCount++] = i + 1;
+        }
+
+        if (isDrain)
+        {
+            drains[drainsCount++] = i + 1;
+        }
+    }
+
+    std::cout << sourcesCount << " ";
+    for (int i = 0; i < sourcesCount; ++i)
+    {
+        std::cout << sources[i] << " ";
+    }
+    std::cout << std::endl;
+
+    std::cout << drainsCount << " ";
+    for (int i = 0; i < drainsCount; ++i)
+    {
+        std::cout << drains[i] << " ";
+    }
+    std::cout << std::endl;
+
+    delete[] sources;
+    delete[] drains;
+}
+
+void Graph::printPowVertexes()
+{
+    powVertexes();
+    for (int i = 0; i < _vertexes; ++i)
+    {
+        std::cout << _linePowVertexes[i] << " ";
+    }
 }
