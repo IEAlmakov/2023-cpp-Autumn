@@ -32,7 +32,7 @@ class LinkedList {
         dispose();
     }
 
-    int Length() const
+    int Length()
     {
         int count = 0;
         Node *current = head;
@@ -44,7 +44,7 @@ class LinkedList {
         return count;
     }
 
-    bool IsEmpty() const
+    bool IsEmpty()
     {
         return head == nullptr;
     }
@@ -63,7 +63,8 @@ class LinkedList {
 
     void PushTail(int data)
     {
-        InsertNode(Length(), new Node(data));
+        Node *node = new Node(data);
+        InsertNode(Length(), node);
     }
 
     int PopHead()
@@ -216,7 +217,7 @@ class LinkedList {
     Node *head;
 };
 
-int main()
+int main(int argc, char *argv[])
 {
     LinkedList list;
     std::cout << list << std::endl;
@@ -243,9 +244,8 @@ int main()
     list.PushHead(5);
     list.PushHead(8);
     list.PushHead(6);
-
     std::cout << list << std::endl;
     list.sort();
     std::cout << list << std::endl;
-    return 0;
+    return EXIT_SUCCESS;
 }
