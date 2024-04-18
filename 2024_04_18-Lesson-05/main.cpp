@@ -149,7 +149,7 @@ class LinkedList {
             delete temp;
         }
     }
-    bool IndexValid(int index) const
+    bool IndexValid(int index)
     {
         if (index < 0)
         {
@@ -215,6 +215,7 @@ class LinkedList {
         return res;
     }
     Node *head;
+    п
 };
 
 int main(int argc, char *argv[])
