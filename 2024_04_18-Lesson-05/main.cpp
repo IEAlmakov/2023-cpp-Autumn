@@ -165,7 +165,7 @@ class LinkedList {
             node->next = head;
             head = node;
         }
-        else if (index == Length())
+        else if (index == Length() || index > Length())
         {
             Node *current = head;
             while (current->next != nullptr)
@@ -198,7 +198,7 @@ class LinkedList {
             head = head->next;
             return temp;
         }
-        if (index == Length() - 1)
+        if (index == Length() || index > Length())
         {
             Node *current = head;
             while (current->next->next != nullptr)
@@ -256,6 +256,7 @@ int main(int argc, char *argv[])
     list.PushHead(4);
     list.PushHead(1);
     list.PushHead(2);
+    list.Insert(99, 99);
     list.PushHead(7);
     list.PushHead(5);
     list.PushHead(8);
