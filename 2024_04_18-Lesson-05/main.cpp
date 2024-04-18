@@ -94,24 +94,34 @@ class LinkedList {
     }
     void swap(int ia, int ib)
     {
-        if (!IndexValid(ia) || !IndexValid(ib))
+        if (!IndexValid(ia) || !IndexValid(ib) || ia == ib)
         {
             return;
         }
+
         if (ia > ib)
         {
-            std::swap(ia, ib);
+            int tmp = ib;
+            ib = ia;
+            ia = tmp;
         }
-        Node *ibnode = ExtractNode(ib);
-        Node *ianode = ExtractNode(ia);
-        InsertNode(ia, ibnode);
-        InsertNode(ib, ianode);
+        Node *nodeB = ExtractNode(ib);
+        Node *nodeA = ExtractNode(ia);
+
+        if (nodeA == nullptr || nodeB == nullptr)
+        {
+            return;
+        }
+
+        InsertNode(ia, nodeB);
+        InsertNode(ib, nodeA);
     }
+
     void sort()
     {
-        for (int i = 0; i < Length(); i++)
+        for (int i = Length() - 1; i >= 0; i--)
         {
-            for (int j = 0; j < Length() - 1; j++)
+            for (int j = 0; j < i; j++)
             {
                 if (Data(j) > Data(j + 1))
                 {
@@ -120,6 +130,7 @@ class LinkedList {
             }
         }
     }
+
     friend std::ostream &operator<<(std::ostream &stream, LinkedList &list)
     {
         Node *current = list.head;
@@ -165,7 +176,7 @@ class LinkedList {
             node->next = head;
             head = node;
         }
-        else if (index == Length() || index > Length())
+        else if (index == Length())
         {
             Node *current = head;
             while (current->next != nullptr)
@@ -198,7 +209,7 @@ class LinkedList {
             head = head->next;
             return temp;
         }
-        if (index == Length() || index > Length())
+        if (index == Length() - 1)
         {
             Node *current = head;
             while (current->next->next != nullptr)
@@ -224,7 +235,7 @@ class LinkedList {
     }
     bool IndexValid(int index)
     {
-        if (index < 0)
+        if (index < 0 || index > Length())
         {
             return false;
         }
@@ -256,7 +267,6 @@ int main(int argc, char *argv[])
     list.PushHead(4);
     list.PushHead(1);
     list.PushHead(2);
-    list.Insert(99, 99);
     list.PushHead(7);
     list.PushHead(5);
     list.PushHead(8);
