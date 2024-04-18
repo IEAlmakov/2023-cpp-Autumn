@@ -29,12 +29,7 @@ class LinkedList {
     }
     ~LinkedList()
     {
-        while (head != nullptr)
-        {
-            Node *temp = head;
-            head = head->next;
-            delete temp;
-        }
+        dispose();
     }
 
     int Length() const
@@ -142,6 +137,17 @@ class LinkedList {
     }
 
     private:
+    // Как рыба гниет с головы, так и список тоже очищаем с головы
+    //(C) защищено авторским правом бай альмаков илья евгеньевич
+    void dispose()
+    {
+        while (head != nullptr)
+        {
+            Node *temp = head;
+            head = head->next;
+            delete temp;
+        }
+    }
     bool IndexValid(int index) const
     {
         if (index < 0)
