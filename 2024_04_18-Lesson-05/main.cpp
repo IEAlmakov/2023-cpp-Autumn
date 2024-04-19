@@ -215,7 +215,6 @@ class LinkedList {
         return res;
     }
     Node *head;
-    п
 };
 
 int main(int argc, char *argv[])
