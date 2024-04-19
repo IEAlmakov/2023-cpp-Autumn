@@ -82,7 +82,7 @@ class LinkedList {
         return PopData(ExtractNode(Length() - 1));
     }
 
-    int Data(int index) const
+    int Data(int index)
     {
         Node *current = head;
         for (int i = 0; i < index && current != nullptr; ++i)
