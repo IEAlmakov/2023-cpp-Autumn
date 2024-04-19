@@ -100,7 +100,9 @@ class LinkedList {
         }
         if (ia > ib)
         {
-            std::swap(ia, ib);
+            int tmp = ia;
+            ia = ib;
+            ib = tmp;
         }
         Node *nodeA = ExtractNode(ia);
         Node *nodeB = ExtractNode(ib - 1);
